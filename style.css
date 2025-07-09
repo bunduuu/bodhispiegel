@@ -1,21 +1,74 @@
-body {
-  font-family: sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  line-height: 1.6;
+/* Import a modern font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+  --bg: #f8f8f8;
+  --text: #1a1a1a;
+  --accent: #4b4b4b;
+  --highlight: #e0e0e0;
+  --glow: rgba(0, 0, 0, 0.05);
 }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  max-width: 750px;
+  margin: auto;
+  padding: 2rem;
+  line-height: 1.7;
+}
+
 header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 2rem;
 }
-nav a {
-  margin: 0 10px;
-  text-decoration: none;
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
 }
+
+nav {
+  margin-top: 1rem;
+}
+
+nav a {
+  margin-right: 15px;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: var(--text);
+}
+
+section {
+  margin-bottom: 3rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px var(--glow);
+  transition: transform 0.2s ease;
+}
+
+section:hover {
+  transform: translateY(-3px);
+}
+
+ul {
+  padding-left: 1.2rem;
+}
+
+a {
+  color: var(--accent);
+}
+
 footer {
+  margin-top: 4rem;
   text-align: center;
-  margin-top: 3rem;
   font-size: 0.9rem;
-  color: #666;
+  color: #888;
 }
