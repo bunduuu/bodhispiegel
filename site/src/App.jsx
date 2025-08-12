@@ -13,6 +13,8 @@ import {
   Youtube,
   ExternalLink,
   ChevronRight,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 const Container = ({ className = "", children }) => (
@@ -103,6 +105,37 @@ const WORK_STREAMS = {
   ],
 };
 
+const DarkModeToggle = () => {
+  const [theme, setTheme] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      return (
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+      );
+    }
+    return "light";
+  });
+
+  React.useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  return (
+    <button
+      aria-label="Toggle dark mode"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="rounded-lg border p-2 hover:bg-accent/50"
+    >
+      {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+    </button>
+  );
+};
+
 const Header = () => (
   <header className="sticky top-0 z-40 border-b backdrop-blur supports-[backdrop-filter]:bg-background/70">
     <Container className="py-3 flex items-center justify-between">
@@ -114,6 +147,7 @@ const Header = () => (
         <a href="#contact" className="hover:text-primary">Contact</a>
       </nav>
       <div className="flex items-center gap-2">
+        <DarkModeToggle />
         <a aria-label="GitHub" href="https://github.com/" className="rounded-lg border p-2 hover:bg-accent/50"><Github className="size-4"/></a>
         <a aria-label="LinkedIn" href="https://www.linkedin.com/in/" className="rounded-lg border p-2 hover:bg-accent/50"><Linkedin className="size-4"/></a>
         <a aria-label="Email" href="mailto:bodhispiegelbusiness@gmail.com" className="rounded-lg border p-2 hover:bg-accent/50"><Mail className="size-4"/></a>
