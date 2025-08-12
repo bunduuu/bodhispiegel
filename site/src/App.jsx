@@ -28,15 +28,24 @@ const Chip = ({ children }) => (
 );
 
 const Section = ({ id, title, subtitle, children }) => (
-  <section id={id} className="py-16">
+  <Motion.section
+    id={id}
+    className="py-16"
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.5 }}
+  >
     <Container>
       <div className="mb-8">
         {title && <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{title}</h2>}
-        {subtitle && <p className="mt-2 text-muted-foreground max-w-3xl leading-relaxed">{subtitle}</p>}
+        {subtitle && (
+          <p className="mt-2 text-muted-foreground max-w-3xl leading-relaxed">{subtitle}</p>
+        )}
       </div>
       {children}
     </Container>
-  </section>
+  </Motion.section>
 );
 
 const Card = ({ as = "div", href, className = "", children }) => {
