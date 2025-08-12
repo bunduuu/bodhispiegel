@@ -170,9 +170,8 @@ export default function BodhiSpiegelSite() {
       <main id="home">
         <section className="relative overflow-hidden">
           <Container>
-            <div className="grid grid-cols-1 md:grid-cols-2 border">
+            <div className="grid grid-cols-1 md:grid-cols-2 border divide-y md:divide-y-0 md:divide-x">
               <HeroPane icon={<Youtube className="size-4" />} kicker="Digital Media" title="Editor → Creator" body="From short-form social videos to full-length storytelling, I craft engaging content with strong hooks, cinematic editing, and purposeful pacing. Skilled in growing audiences, refining narrative arcs, and delivering work that matches brand goals." ctaText="See Media Work" ctaIcon={<PlayCircle className="size-4" />} chips={["Premiere Pro", "After Effects", "DaVinci", "Shorts Strategy"]} />
-              <div className="border-t md:border-t-0 md:border-l" />
               <HeroPane icon={<Cpu className="size-4" />} kicker="Computer Engineering" title="Systems → Impact" body="Penn State Computer Engineering + Japanese minor. Interested in the overlap between technology and creativity — from small form-factor PC builds to automation tools that make workflows faster and smarter." ctaText="See Engineering Work" ctaIcon={<Code className="size-4" />} chips={["Python", "React", "Embedded", "Data Viz"]} />
             </div>
           </Container>
