@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import {
   Github,
   Linkedin,
@@ -37,16 +37,18 @@ const Section = ({ id, title, subtitle, children }) => (
   </section>
 );
 
-const Card = ({ as: As = "div", href, className = "", children }) => {
+const Card = ({ as = "div", href, className = "", children }) => {
   const classes = "rounded-2xl border p-6 transition-transform hover:-translate-y-1 hover:shadow-sm";
   const all = `${classes} ${className}`;
+  const Component = as;
   if (href) return <a href={href} className={`${all} block`}>{children}</a>;
-  return <As className={all}>{children}</As>;
+  return <Component className={all}>{children}</Component>;
 };
 
-const Grid = ({ cols = 2, children, className = "" }) => (
-  <div className={`grid grid-cols-1 md:grid-cols-${cols} gap-5 ${className}`}>{children}</div>
-);
+const Grid = ({ cols = 2, children, className = "" }) => {
+  const colMap = { 1: 'md:grid-cols-1', 2: 'md:grid-cols-2', 3: 'md:grid-cols-3' };
+  return <div className={`grid grid-cols-1 ${colMap[cols] ?? ''} gap-5 ${className}`}>{children}</div>;
+};
 
 const HIGHLIGHTS = [
   { stat: "10M+", label: "Views across multiple platforms (short + long form)" },
@@ -148,7 +150,7 @@ const ProjectCard = ({ side = "media", title, blurb, tags = [], link }) => {
 };
 
 const HeroPane = ({ icon, kicker, title, body, ctaText, ctaIcon, chips = [] }) => (
-  <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="relative">
+  <Motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="relative">
     <div className="p-8 md:p-12">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">{icon} {kicker}</div>
       <h2 className="mt-3 text-3xl md:text-5xl font-bold leading-tight">{title}</h2>
@@ -158,7 +160,7 @@ const HeroPane = ({ icon, kicker, title, body, ctaText, ctaIcon, chips = [] }) =
         <div className="flex items-center gap-2 text-xs text-muted-foreground">{chips.map((c) => (<Chip key={c}>{c}</Chip>))}</div>
       </div>
     </div>
-  </motion.div>
+  </Motion.div>
 );
 
 export default function BodhiSpiegelSite() {
