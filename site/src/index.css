@@ -2,6 +2,16 @@ html {
   scroll-behavior: smooth;
 }
 
+*, *::before, *::after {
+  @apply transition-colors duration-300;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none;
+  }
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 47.4% 11.2%;

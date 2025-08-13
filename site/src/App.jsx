@@ -1,5 +1,5 @@
 import React from "react";
-import { motion as Motion } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import {
   Github,
   Linkedin,
@@ -140,7 +140,18 @@ const DarkModeToggle = () => {
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className="rounded-lg border p-2 hover:bg-accent/50"
     >
-      {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+      <AnimatePresence initial={false} mode="wait">
+        <Motion.span
+          key={theme}
+          initial={{ rotate: -90, opacity: 0 }}
+          animate={{ rotate: 0, opacity: 1 }}
+          exit={{ rotate: 90, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="block"
+        >
+          {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+        </Motion.span>
+      </AnimatePresence>
     </button>
   );
 };
