@@ -1,419 +1,179 @@
-import React from "react";
-import { motion as Motion, AnimatePresence } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import {
-  Mail,
-  Youtube,
-  Linkedin,
-  Sun,
-  Moon,
-  PlayCircle,
+  ArrowRight,
+  BarChart3,
   Camera,
+  ChartNoAxesCombined,
   Clapperboard,
-  TrendingUp,
-  Wand2,
-  Mic,
-  ArrowUpRight,
-  CheckCircle2,
+  Eye,
+  Linkedin,
+  Mail,
+  Rocket,
+  Youtube,
 } from "lucide-react";
 
-const Container = ({ className = "", children }) => (
-  <div className={`mx-auto w-full max-w-6xl px-4 sm:px-6 ${className}`}>{children}</div>
-);
+const projects = [
+  {
+    title: "Long-Form YouTube Narrative",
+    role: "Editor + Story Strategist",
+    description:
+      "Retention-focused structure, hook redesign, and pacing polish for creator-led storytelling.",
+    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    tags: ["Long-form", "Retention", "Narrative"],
+  },
+  {
+    title: "Public Media Feature",
+    role: "Producer + Editor",
+    description:
+      "Public-interest media piece balancing emotional arc, clarity, and platform-ready distribution.",
+    embedUrl: "https://www.youtube.com/embed/ysz5S6PUM-U",
+    tags: ["Public media", "Documentary", "Audience-first"],
+  },
+  {
+    title: "Social Cutdown System",
+    role: "Editor + Media Strategist",
+    description:
+      "Series of high-velocity social edits designed to increase completion rates and repeat views.",
+    embedUrl: "https://www.youtube.com/embed/jNQXAC9IVRw",
+    tags: ["Social", "Short-form", "Growth"],
+  },
+];
 
-const Section = ({ id, label, title, subtitle, children }) => (
-  <Motion.section
-    id={id}
-    className="py-16 sm:py-20"
-    initial={{ opacity: 0, y: 32 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.2 }}
-    transition={{ duration: 0.45 }}
-  >
-    <Container>
-      <div className="mb-8 sm:mb-10">
-        {label && (
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">{label}</p>
-        )}
-        {title && <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>}
-        {subtitle && <p className="mt-3 max-w-3xl text-muted-foreground">{subtitle}</p>}
-      </div>
-      {children}
-    </Container>
-  </Motion.section>
-);
+const steps = [
+  "Audience & goal discovery",
+  "Hook & structure planning",
+  "Edit & pace like a storyteller",
+  "Package & launch",
+  "Analyse & iterate",
+];
 
-const Card = ({ className = "", children }) => (
-  <div className={`rounded-2xl border border-border bg-background/80 p-6 ${className}`}>{children}</div>
-);
+const metrics = [
+  { icon: Eye, value: "10M+ views", label: "Combined views across channels" },
+  { icon: Camera, value: "8+ years", label: "Hands-on editing experience" },
+  { icon: BarChart3, value: "Monetised channels", label: "Multiple YouTube channels monetised" },
+  { icon: Clapperboard, value: "Multi-format storyteller", label: "Long-form, social, public media & documentary" },
+];
 
-const Pill = ({ children }) => (
-  <span className="inline-flex rounded-full border border-border px-3 py-1 text-xs font-medium">
-    {children}
-  </span>
-);
-
-const DarkModeToggle = () => {
-  const [theme, setTheme] = React.useState(() => {
-    if (typeof window === "undefined") return "light";
-
-    return (
-      localStorage.getItem("theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-    );
-  });
-
-  React.useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
+export default function App() {
   return (
-    <button
-      aria-label="Toggle dark mode"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="rounded-lg border p-2 hover:bg-accent/50"
-    >
-      <AnimatePresence mode="wait" initial={false}>
-        <Motion.span
-          key={theme}
-          initial={{ rotate: -90, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          exit={{ rotate: 90, opacity: 0 }}
-          transition={{ duration: 0.18 }}
-          className="block"
-        >
-          {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-        </Motion.span>
-      </AnimatePresence>
-    </button>
-  );
-};
+    <div className="min-h-screen bg-[#070708] text-zinc-100">
+      <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#070708]/85 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+          <a href="#home" className="text-sm font-semibold uppercase tracking-[0.2em]">Bodhi Spiegel</a>
+          <nav className="hidden items-center gap-6 text-sm md:flex">
+            <a href="#work" className="hover:text-cyan-300">Work</a>
+            <a href="#services" className="hover:text-cyan-300">Services</a>
+            <a href="#about" className="hover:text-cyan-300">About</a>
+            <a href="#contact" className="hover:text-cyan-300">Contact</a>
+          </nav>
+        </div>
+      </header>
 
-const STATS = [
-  { value: "10M+", label: "Combined views across personal + client channels" },
-  { value: "8 years", label: "Hands-on editing and content production experience" },
-  { value: "Multi-platform", label: "Short-form, long-form, social, newsletter, and public media" },
-  { value: "Monetized", label: "Built and monetized multiple YouTube channels" },
-];
-
-const SERVICES = [
-  {
-    icon: <Clapperboard className="size-5" />,
-    title: "Video Editing",
-    body: "Retention-focused edits for commentary, gaming, documentary, and creator-led formats.",
-  },
-  {
-    icon: <TrendingUp className="size-5" />,
-    title: "YouTube Growth Strategy",
-    body: "Packaging, thumbnail direction, pacing audits, and analytics-backed iteration.",
-  },
-  {
-    icon: <Camera className="size-5" />,
-    title: "Digital Storytelling",
-    body: "Story-first scripting and platform-ready distribution for social and public-facing campaigns.",
-  },
-  {
-    icon: <Wand2 className="size-5" />,
-    title: "Creative Direction",
-    body: "Hook design, tone shaping, and brand-consistent content systems for creators and teams.",
-  },
-];
-
-const FEATURED_WORK = [
-  {
-    title: "WPSU Digital Media",
-    description:
-      "Produced social, promotional, and community storytelling content for public media with scripting, editing, and audience engagement built in.",
-    tags: ["Public Media", "Story Packaging", "Community Focus"],
-  },
-  {
-    title: "YouTube Creator & Channel Owner",
-    description:
-      "Built and monetized multiple channels; generated over 10 million views through stronger hooks, cleaner pacing, and thumbnail + title strategy.",
-    tags: ["Channel Growth", "Retention", "Monetization"],
-  },
-  {
-    title: "Freelance Editor & Content Strategist",
-    description:
-      "Edited long-form and short-form content for creators across gaming, commentary, and documentary niches.",
-    tags: ["Client Work", "Long + Short Form", "Performance Uplift"],
-  },
-];
-
-const PROCESS = [
-  "Audience + format audit",
-  "Hook and structure planning",
-  "Edit execution and pacing pass",
-  "Packaging (title, thumbnail, framing)",
-  "Post-publish analytics review",
-];
-
-const Header = () => (
-  <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-    <Container className="flex items-center justify-between py-3">
-      <a href="#home" className="text-sm font-semibold tracking-[0.14em] uppercase">
-        Bodhi Spiegel
-      </a>
-      <nav className="hidden items-center gap-6 text-sm md:flex">
-        <a href="#work" className="hover:text-primary">
-          Work
-        </a>
-        <a href="#services" className="hover:text-primary">
-          Services
-        </a>
-        <a href="#about" className="hover:text-primary">
-          About
-        </a>
-        <a href="#contact" className="hover:text-primary">
-          Contact
-        </a>
-      </nav>
-      <div className="flex items-center gap-2">
-        <DarkModeToggle />
-        <a
-          aria-label="Email"
-          href="mailto:bodhispiegel@gmail.com"
-          className="rounded-lg border p-2 hover:bg-accent/50"
-        >
-          <Mail className="size-4" />
-        </a>
-        <a
-          aria-label="YouTube"
-          href="https://www.youtube.com/@"
-          className="rounded-lg border p-2 hover:bg-accent/50"
-        >
-          <Youtube className="size-4" />
-        </a>
-        <a
-          aria-label="LinkedIn"
-          href="https://www.linkedin.com/in/"
-          className="rounded-lg border p-2 hover:bg-accent/50"
-        >
-          <Linkedin className="size-4" />
-        </a>
-      </div>
-    </Container>
-  </header>
-);
-
-export default function BodhiSpiegelSite() {
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
-
-      <main id="home">
-        <section className="relative overflow-hidden border-b">
-          <Container className="py-16 sm:py-24">
-            <Motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end"
-            >
-              <div>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                  Content & Media Strategist
-                </p>
-                <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-                  I help creators turn ideas into content people actually finish.
-                </h1>
-                <p className="mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-                  Broadcast journalism student and editor focused on storytelling, audience retention,
-                  and YouTube growth. I build videos that look sharp, move fast, and perform.
-                </p>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <a
-                    href="#work"
-                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
-                  >
-                    <PlayCircle className="size-4" />
-                    View Featured Work
-                  </a>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-medium hover:bg-accent/50"
-                  >
-                    Let&apos;s Collaborate
-                    <ArrowUpRight className="size-4" />
-                  </a>
-                </div>
-              </div>
-
-              <Card className="space-y-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  Core strengths
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Pill>Video Editing</Pill>
-                  <Pill>Content Strategy</Pill>
-                  <Pill>Audience Retention</Pill>
-                  <Pill>YouTube Analytics</Pill>
-                  <Pill>Thumbnail Design</Pill>
-                  <Pill>Adobe Premiere Pro</Pill>
-                  <Pill>DaVinci Resolve</Pill>
-                  <Pill>After Effects</Pill>
-                </div>
-              </Card>
-            </Motion.div>
-          </Container>
+      <main>
+        <section id="home" className="relative overflow-hidden border-b border-zinc-900 bg-[#0a0a0a]">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.16),transparent_38%),linear-gradient(135deg,rgba(24,24,27,0.4),rgba(10,10,10,0.9))]" />
+          <Motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 sm:py-28"
+          >
+            <h1 className="max-w-4xl text-4xl font-semibold leading-tight sm:text-6xl">Story-driven video that audiences finish.</h1>
+            <p className="mt-6 max-w-3xl text-base text-zinc-300 sm:text-lg">
+              I’m Bodhi Spiegel — a video editor & media strategist. I craft long-form YouTube narratives,
+              public-media pieces and social content that hook viewers, build retention and grow channels.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#work" className="inline-flex items-center gap-2 rounded-xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-cyan-300">See my work <ArrowRight className="size-4" /></a>
+              <a href="#contact" className="inline-flex items-center gap-2 rounded-xl border border-zinc-600 px-5 py-3 text-sm font-semibold hover:border-cyan-300 hover:text-cyan-300">Let&apos;s collaborate</a>
+            </div>
+          </Motion.div>
         </section>
 
-        <section className="border-b bg-muted/25">
-          <Container className="py-8 sm:py-10">
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {STATS.map((item) => (
-                <div key={item.label}>
-                  <p className="text-2xl font-semibold leading-none">{item.value}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{item.label}</p>
+        <section className="mx-auto grid w-full max-w-6xl gap-4 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+          {metrics.map((metric) => {
+            const MetricIcon = metric.icon;
+            return (
+              <div key={metric.value} className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-5 shadow-[0_10px_35px_rgba(0,0,0,0.35)]">
+                <MetricIcon className="mb-4 size-5 text-cyan-300" />
+                <p className="text-2xl font-semibold">{metric.value}</p>
+                <p className="mt-2 text-sm text-zinc-400">{metric.label}</p>
+              </div>
+            );
+          })}
+        </section>
+
+        <section id="work" className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+          <h2 className="text-3xl font-semibold sm:text-4xl">Featured work</h2>
+          <div className="mt-8 grid gap-6">
+            {projects.map((project) => (
+              <article key={project.title} className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-cyan-400/70">
+                <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">{project.role}</p>
+                    <h3 className="mt-2 text-2xl font-semibold">{project.title}</h3>
+                    <p className="mt-3 text-zinc-300">{project.description}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.tags.map((tag) => <span key={tag} className="rounded-full border border-zinc-700 px-3 py-1 text-xs">{tag}</span>)}
+                    </div>
+                  </div>
+                  <div className="relative h-0 overflow-hidden rounded-xl border border-zinc-800 pb-[56.25%]">
+                    <iframe
+                      className="absolute left-0 top-0 h-full w-full"
+                      src={project.embedUrl}
+                      title={project.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
                 </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="services" className="border-y border-zinc-900 bg-zinc-950/60 py-14">
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+            <h2 className="text-3xl font-semibold sm:text-4xl">My approach</h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-5">
+              {steps.map((step, idx) => (
+                <Motion.div
+                  key={step}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ delay: idx * 0.08, duration: 0.4 }}
+                  className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4"
+                >
+                  <div className="mb-3 inline-flex size-8 items-center justify-center rounded-full bg-cyan-400/15 text-sm font-semibold text-cyan-300">{idx + 1}</div>
+                  <p className="text-sm text-zinc-200">{step}</p>
+                </Motion.div>
               ))}
             </div>
-          </Container>
+          </div>
         </section>
 
-        <Section
-          id="work"
-          label="Featured Work"
-          title="Built for creators, channels, and public media"
-          subtitle="A snapshot of the media work I do across personal projects and client collaborations."
-        >
-          <div className="grid gap-5 md:grid-cols-3">
-            {FEATURED_WORK.map((project) => (
-              <Card key={project.title} className="h-full">
-                <h3 className="text-xl font-semibold tracking-tight">{project.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Pill key={tag}>{tag}</Pill>
-                  ))}
-                </div>
-              </Card>
+        <section id="about" className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6">
+          <h2 className="text-3xl font-semibold sm:text-4xl">About</h2>
+          <p className="mt-5 max-w-3xl text-zinc-300">I’m a Penn State media student and working creator. Outside class I run monetised YouTube channels, intern with WPSU and collaborate with creators to craft content people actually finish.</p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {["Video editing", "Narrative structure", "Audience retention", "Strategy & analytics"].map((item) => (
+              <span key={item} className="rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-xs">{item}</span>
             ))}
           </div>
-        </Section>
+          <p className="mt-6 max-w-3xl text-zinc-400">My mission is to blend story craft with data-backed strategy so every video feels intentional, emotional, and impossible to click away from.</p>
+        </section>
 
-        <Section
-          id="services"
-          label="Services"
-          title="Where I can help"
-          subtitle="From first hook to final upload, I focus on clarity, pacing, and content performance."
-        >
-          <div className="grid gap-5 md:grid-cols-2">
-            {SERVICES.map((service) => (
-              <Card key={service.title} className="flex items-start gap-4">
-                <div className="rounded-xl border p-2 text-primary">{service.icon}</div>
-                <div>
-                  <h3 className="text-lg font-semibold">{service.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{service.body}</p>
-                </div>
-              </Card>
-            ))}
+        <section id="contact" className="mx-auto mb-16 w-full max-w-6xl rounded-3xl border border-cyan-400/35 bg-zinc-950 px-4 py-14 sm:px-6">
+          <h2 className="max-w-2xl text-3xl font-semibold sm:text-4xl">Let’s create stories that audiences can’t stop watching.</h2>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a href="mailto:bodhispiegel@gmail.com" className="inline-flex items-center gap-2 rounded-xl bg-cyan-400 px-4 py-2 text-sm font-semibold text-zinc-900"><Mail className="size-4"/>Email</a>
+            <a href="https://www.linkedin.com/in/bodhi-spiegel" className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 px-4 py-2 text-sm"><Linkedin className="size-4"/>LinkedIn</a>
+            <a href="https://www.youtube.com/@bodhispiegel" className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 px-4 py-2 text-sm"><Youtube className="size-4"/>Watch my latest uploads</a>
           </div>
-        </Section>
-
-        <Section
-          id="about"
-          label="About"
-          title="Media-first, strategy-backed"
-          subtitle="I study broadcast journalism at Penn State and apply that foundation to digital storytelling that drives engagement."
-        >
-          <div className="grid gap-5 md:grid-cols-2">
-            <Card>
-              <h3 className="text-lg font-semibold">What I focus on</h3>
-              <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-                <li className="flex gap-2">
-                  <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
-                  Story structure and pacing that keeps people watching.
-                </li>
-                <li className="flex gap-2">
-                  <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
-                  Social-ready edits built for platform behavior.
-                </li>
-                <li className="flex gap-2">
-                  <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
-                  Content packaging that improves clicks and watch time.
-                </li>
-                <li className="flex gap-2">
-                  <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
-                  Community-centered reporting style from public media work.
-                </li>
-              </ul>
-            </Card>
-            <Card>
-              <h3 className="text-lg font-semibold">Workflow</h3>
-              <ol className="mt-4 space-y-3 text-sm text-muted-foreground">
-                {PROCESS.map((step, index) => (
-                  <li key={step} className="flex items-start gap-3">
-                    <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full border text-xs font-semibold">
-                      {index + 1}
-                    </span>
-                    <span>{step}</span>
-                  </li>
-                ))}
-              </ol>
-            </Card>
-          </div>
-        </Section>
-
-        <Section
-          id="contact"
-          label="Contact"
-          title="Let&apos;s build your next piece of content"
-          subtitle="Open to creator partnerships, freelance editing, and strategy projects."
-        >
-          <div className="grid gap-5 md:grid-cols-3">
-            <a
-              href="mailto:bodhispiegel@gmail.com"
-              className="rounded-2xl border p-6 transition hover:-translate-y-1 hover:bg-accent/30"
-            >
-              <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail className="size-4" /> Email
-              </div>
-              <p className="font-medium">bodhispiegel@gmail.com</p>
-              <p className="mt-1 text-xs text-muted-foreground">Best for project inquiries</p>
-            </a>
-
-            <a
-              href="https://www.youtube.com/@"
-              className="rounded-2xl border p-6 transition hover:-translate-y-1 hover:bg-accent/30"
-            >
-              <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
-                <Youtube className="size-4" /> YouTube
-              </div>
-              <p className="font-medium">Watch latest uploads</p>
-              <p className="mt-1 text-xs text-muted-foreground">Storytelling + creator work</p>
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/"
-              className="rounded-2xl border p-6 transition hover:-translate-y-1 hover:bg-accent/30"
-            >
-              <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
-                <Mic className="size-4" /> LinkedIn
-              </div>
-              <p className="font-medium">Professional profile</p>
-              <p className="mt-1 text-xs text-muted-foreground">Experience + collaborations</p>
-            </a>
-          </div>
-        </Section>
+        </section>
       </main>
-
-      <footer className="border-t">
-        <Container className="flex flex-col items-start justify-between gap-3 py-8 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} Bodhi Spiegel</p>
-          <div className="flex items-center gap-4">
-            <a href="#home" className="hover:underline">
-              Top
-            </a>
-            <a href="#work" className="hover:underline">
-              Work
-            </a>
-            <a href="#contact" className="hover:underline">
-              Contact
-            </a>
-          </div>
-        </Container>
-      </footer>
     </div>
   );
 }
