@@ -1,0 +1,5 @@
+# Build artifacts from site deployment output
+/docs/assets/
+/docs/index.html
+/docs/bodhiicon.png
+/docs/vite.svg
