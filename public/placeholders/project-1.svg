@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <rect width="1200" height="675" fill="#0B1020"/>
+  <circle cx="200" cy="120" r="180" fill="#5B6BFF" fill-opacity="0.28"/>
+  <circle cx="980" cy="530" r="220" fill="#29D3E8" fill-opacity="0.23"/>
+  <rect x="84" y="84" width="1032" height="507" rx="24" fill="#0F1730" stroke="#7C89FF" stroke-opacity="0.4"/>
+  <path d="M140 168H1060" stroke="#6F7BFF" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="10 10"/>
+  <path d="M140 520H1060" stroke="#6F7BFF" stroke-opacity="0.3" stroke-width="2"/>
+  <text x="140" y="260" fill="#EAF0FF" font-size="64" font-family="Arial, sans-serif" font-weight="700">Bodhi Spiegel</text>
+  <text x="140" y="328" fill="#9AB2FF" font-size="36" font-family="Arial, sans-serif">Placeholder Project Frame 1</text>
+</svg>
