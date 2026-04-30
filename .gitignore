@@ -1,5 +1,10 @@
-# Build artifacts from site deployment output
-/docs/assets/
-/docs/index.html
-/docs/bodhiicon.png
-/docs/vite.svg
+# Node dependencies
+node_modules/
+site/node_modules/
+
+# Build output
+site/dist/
+
+# Local env/cache
+.DS_Store
+*.log
